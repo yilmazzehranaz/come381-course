@@ -1,0 +1,39 @@
+Kampüs Kafe - DML sonuçları
+SQLite ile kontrol edilen ön çıktıdır.
+
+BEGIN;
+
+Zamdan önce:
+name | price
+Çay | 20
+Türk Kahvesi | 35
+Latte | 60
+(3 satır)
+
+UPDATE product
+SET price = price + 5
+WHERE category = 'Sıcak İçecek';
+
+Güncellenen satır: 3
+
+Zamdan sonra:
+name | price
+Çay | 25
+Türk Kahvesi | 40
+Latte | 65
+(3 satır)
+
+INSERT INTO order_item VALUES (1, 999, 1);
+
+Hata: FOREIGN KEY constraint failed
+Beklenen PostgreSQL hata kodu: 23503
+foreign_key_violation
+
+ROLLBACK;
+
+Geri alma işleminden sonra:
+name | price
+Çay | 20
+Türk Kahvesi | 35
+Latte | 60
+(3 satır)
